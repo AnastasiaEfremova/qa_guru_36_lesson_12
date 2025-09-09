@@ -1,5 +1,7 @@
 package tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import tests.helpers.Attach;
 import tests.pages.RegistrationPage;
@@ -24,6 +26,11 @@ public class RegistrationPageTests extends BaseTest {
     RegistrationPage registrationPage = new RegistrationPage();
 
     TestDataForRegistrationPage testData = new TestDataForRegistrationPage().generateRandomData();
+
+    @BeforeEach
+    void beforeEachTest() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
 
     @Test
     @DisplayName("Успешное заполнение всех полей формы регистрации")
